@@ -13,6 +13,7 @@ pipeline {
     stage("dagger") {
       steps {
         sh 'printenv'
+        sh 'git log'
       }
     }
   }
