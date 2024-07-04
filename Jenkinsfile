@@ -15,7 +15,7 @@ pipeline {
         sh 'printenv'
         sh 'curl -v -u admin:f095ce071d12486d92762ec2a156a90c http://localhost:8080/userContent/dagger --output dagger'
         sh 'chmod +x dagger'
-        sh './dagger version'
+        sh './dagger -m github.com/shykes/daggerverse/hello@v0.1.2 call hello --greeting=bonjour --name=daggernaut'
       }
     }
   }
