@@ -13,9 +13,7 @@ pipeline {
     stage("dagger") {
       steps {
         sh 'printenv'
-        sh 'git log'
         sh 'curl -v -u admin:f095ce071d12486d92762ec2a156a90c http://localhost:8080/userContent/dagger --output dagger'
-        sh 'ls'
         sh 'chmod +x dagger'
         sh './dagger version'
       }
