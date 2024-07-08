@@ -24,7 +24,6 @@ pipeline {
                   reference: '', 
                   shallow: false
                   ), 
-                  lfs(), 
                   localBranch('**')
               ], 
               userRemoteConfigs: [
