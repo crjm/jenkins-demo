@@ -15,7 +15,7 @@ pipeline {
         
         checkout ([
           scm: scmGit(
-              branches: [[name: '**']], 
+              branches: [[name: 'main']], 
               extensions: [
               cloneOption(
                   shallow: false
