@@ -17,7 +17,6 @@ pipeline {
           poll: false, 
           scm: scmGit(
               branches: [[name: '**']], 
-              browser: github('https://github.com/$org/$repo'), 
               extensions: [
               cloneOption(
                   honorRefspec: true, 
@@ -29,7 +28,7 @@ pipeline {
                   localBranch('**')
               ], 
               userRemoteConfigs: [
-                  [url: 'https://github.com/$org/$repo']
+                  [url: 'https://github.com/crjm/dagger-modules.git']
               ]
           )
         ])
