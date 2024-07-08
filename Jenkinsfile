@@ -12,6 +12,7 @@ pipeline {
   stages {
     stage("dagger") {
       steps {
+        
         checkout ([
           scm: scmGit(
               branches: [[name: '**']], 
