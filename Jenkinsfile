@@ -13,26 +13,15 @@ pipeline {
     stage("repo 1") {
       steps {
         
-        checkout scmGit(branches: [[name: '*/main']], browser: github('https://github.com/crjm/dagger-modules'), extensions: [[$class: 'WipeWorkspace'], localBranch()], userRemoteConfigs: [[url: 'https://github.com/crjm/dagger-modules']])
+        checkout scmGit(browser: github('https://github.com/crjm/dagger-modules'), extensions: [[$class: 'WipeWorkspace'], localBranch()], userRemoteConfigs: [[url: 'https://github.com/crjm/dagger-modules']])
 
         sh 'git branch -a'
+        sh 'git log'
+        sh 'git rev-parse --abbrev-ref HEAD'
         sh 'printenv'
         sh 'curl -v -u admin:f095ce071d12486d92762ec2a156a90c http://localhost:8080/userContent/dagger --output dagger'
         sh 'chmod +x dagger'
         sh 'export _EXPERIMENTAL_DAGGER_RUNNER_HOST=docker-container://dagger-engine.dev'
-        sh '_EXPERIMENTAL_DAGGER_RUNNER_HOST=docker-container://dagger-engine.dev ./dagger -m github.com/shykes/daggerverse/hello@v0.1.2 call hello --greeting=bonjour --name=daggernaut'
-      }
-    }
-    
-    stage("repo 2") {
-      steps {
-        
-        checkout scmGit(branches: [[name: '*/main']], browser: github('https://github.com/crjm/dagger-modules'), extensions: [[$class: 'WipeWorkspace'], localBranch()], userRemoteConfigs: [[url: 'https://github.com/crjm/dagger']])
-
-        sh 'git branch -a'
-        sh 'printenv'
-        sh 'curl -v -u admin:f095ce071d12486d92762ec2a156a90c http://localhost:8080/userContent/dagger --output dagger'
-        sh 'chmod +x dagger'
         sh '_EXPERIMENTAL_DAGGER_RUNNER_HOST=docker-container://dagger-engine.dev ./dagger -m github.com/shykes/daggerverse/hello@v0.1.2 call hello --greeting=bonjour --name=daggernaut'
       }
     }
