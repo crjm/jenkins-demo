@@ -13,7 +13,7 @@ pipeline {
     stage("repo 1") {
       steps {
         
-        checkout scmGit(browser: github('https://github.com/crjm/dagger-modules'), extensions: [[$class: 'WipeWorkspace'], localBranch()], userRemoteConfigs: [[url: 'https://github.com/crjm/dagger-modules']])
+        checkout scmGit(branches: [[name: '**']], browser: github('https://github.com/crjm/dagger-modules'), extensions: [[$class: 'WipeWorkspace'], localBranch()], userRemoteConfigs: [[url: 'https://github.com/crjm/dagger-modules']])
 
         sh 'git branch -a'
         sh 'git log'
