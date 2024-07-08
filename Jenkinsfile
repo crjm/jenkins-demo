@@ -22,7 +22,7 @@ pipeline {
                   ), 
               ], 
               userRemoteConfigs: [
-                  [url: 'https://github.com/crjm/dagger-modules.git']
+                  [url: 'https://github.com/crjm/dagger.git']
               ]
           )
         ])
