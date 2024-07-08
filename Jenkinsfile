@@ -12,9 +12,27 @@ pipeline {
   stages {
     stage("dagger") {
       steps {
-        checkout scmGit(userRemoteConfigs: [
-                    [ url: 'https://github.com/jenkinsci/git-plugin' ]
-                ])
+        checkout ([
+          changelog: false, 
+          poll: false, 
+          scm: scmGit(
+              branches: [[name: '**']], 
+              browser: github('https://github.com/$org/$repo'), 
+              extensions: [
+              cloneOption(
+                  honorRefspec: true, 
+                  noTags: true, 
+                  reference: '', 
+                  shallow: false
+                  ), 
+                  lfs(), 
+                  localBranch('**')
+              ], 
+              userRemoteConfigs: [
+                  [url: 'https://github.com/$org/$repo']
+              ]
+          )
+        ])
 
         sh 'printenv'
         sh 'curl -v -u admin:f095ce071d12486d92762ec2a156a90c http://localhost:8080/userContent/dagger --output dagger'
