@@ -13,18 +13,12 @@ pipeline {
     stage("dagger") {
       steps {
         checkout ([
-          changelog: false, 
-          poll: false, 
           scm: scmGit(
               branches: [[name: '**']], 
               extensions: [
               cloneOption(
-                  honorRefspec: true, 
-                  noTags: true, 
-                  reference: '', 
                   shallow: false
                   ), 
-                  localBranch('**')
               ], 
               userRemoteConfigs: [
                   [url: 'https://github.com/crjm/dagger-modules.git']
@@ -32,6 +26,7 @@ pipeline {
           )
         ])
 
+        sh 'git branch -a'
         sh 'printenv'
         sh 'curl -v -u admin:f095ce071d12486d92762ec2a156a90c http://localhost:8080/userContent/dagger --output dagger'
         sh 'chmod +x dagger'
