@@ -13,19 +13,7 @@ pipeline {
     stage("dagger") {
       steps {
         
-        checkout ([
-          scm: scmGit(
-              branches: [[name: 'main']], 
-              extensions: [
-              cloneOption(
-                  shallow: false
-                  ), 
-              ], 
-              userRemoteConfigs: [
-                  [url: 'https://github.com/crjm/dagger.git']
-              ]
-          )
-        ])
+        checkout scmGit(branches: [[name: '*/main']], browser: github('https://github.com/crjm/dagger-modules'), extensions: [[$class: 'WipeWorkspace'], localBranch()], userRemoteConfigs: [[url: 'https://github.com/crjm/dagger-modules']])
 
         sh 'git branch -a'
         sh 'printenv'
